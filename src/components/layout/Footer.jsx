@@ -1,7 +1,9 @@
 import { Mail, Phone, MapPin, Share2, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Footer() {
+  const navigate = useNavigate();
   return (
     <footer className="bg-gray-900 text-gray-100">
       {/* Main Footer */}
@@ -9,14 +11,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <div>
-            <div className="inline-flex items-center gap-2 mb-4 bg-white p-2 rounded">
-              <div className="w-5 h-5 flex items-center justify-center">
-                <img src='/favicon.svg' className='img-fluid' alt='Logo' />
+            <Link to={'/'} className='flex items-center gap-2 flex-1'>
+              <div className="inline-flex items-center gap-2 mb-4 bg-white p-2 rounded">
+                <div className="w-5 h-5 flex items-center justify-center">
+                  <img src='/favicon.svg' className='img-fluid' alt='Logo' />
+                </div>
+                <span className="font-bold text-xl text-gray-900 hidden sm:inline">
+                  M-Mart
+                </span>
               </div>
-              <span className="font-bold text-xl text-gray-900 hidden sm:inline">
-                M-Mart
-              </span>
-            </div>
+            </Link>
             <p className="text-gray-400 text-sm mb-4">
               Your trusted online marketplace for quality products and exceptional service.
             </p>
@@ -59,33 +63,6 @@ export default function Footer() {
                 <Link to="/contact" className="hover:text-white transition-colors text-sm">
                   Contact
                 </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Categories */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Categories</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <a href="#" className="hover:text-white transition-colors text-sm">
-                  Electronics
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors text-sm">
-                  Fashion
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors text-sm">
-                  Home & Garden
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors text-sm">
-                  Sports
-                </a>
               </li>
             </ul>
           </div>

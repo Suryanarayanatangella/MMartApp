@@ -19,7 +19,7 @@ import {
  } from "../store/cartSlice";
  import { selectIsLoggedIn } from "../store/authSlice";
 
- export default function CartPage() {
+ export default function CartPage({product}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -133,7 +133,6 @@ import {
         );
     }
 
-
     return (
         <div>
             <Header />
@@ -182,6 +181,7 @@ import {
                                             src={item.product.image || 'https://placehold.co/100x100?text=No+Image'}
                                             alt={item.product.name}
                                             className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
+                                            onClick={() => navigate(`/product/${item.product.id}`)}
                                             onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=No+Image'; }}
                                         />
 
@@ -190,7 +190,9 @@ import {
                                             <p className="text-xs text-blue-600 font-medium uppercase mb-1">
                                                 {item.product.category}
                                             </p>
-                                            <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 mb-1">
+                                            <h3 
+                                            onClick={() => navigate(`/product/${item.product.id}`)}
+                                            className="font-semibold text-gray-900 text-sm line-clamp-2 mb-1">
                                                 {item.product.name}
                                             </h3>
                                             <div className="flex items-center gap-2">

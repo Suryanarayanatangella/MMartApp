@@ -1,4 +1,6 @@
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
 import './App.css'
@@ -13,8 +15,12 @@ import Categories from './pages/Categories'
 import AdminOrders from './pages/AdminOrders'
 import MyOrders from './pages/MyOrders'
 import ChatWidget from './pages/ChatWidget'
+import AboutUs from './pages/AboutUs'
+import ContactUs from './pages/ContactUs'
+import ProductDetail from './pages/ProductDetail'
 
 function App() {
+  const Header = React.memo(() => {return <Header/>})
   return (
     <Router>
       <Routes>
@@ -31,6 +37,9 @@ function App() {
         <Route path='/order-success' element = {<OrderSuccessPage />}/>
         <Route path='/admin/orders' element={<AdminOrders />} />
         <Route path='/orders' element={<MyOrders />} />
+        <Route path='/about' element={<AboutUs/>}/>
+        <Route path='/contact' element={<ContactUs/>}/>
+        <Route path='/product/:id' element={<ProductDetail />}/>
         <Route path="*" element={<NoPage />} />
       </Routes>
       <ChatWidget /> 

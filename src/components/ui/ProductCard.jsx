@@ -33,6 +33,7 @@ export default function ProductCard({ product }) {
       setTimeout(()=>{
         setAddedMsg('')
       }, 2000)
+      navigate('/cart');
     }
     setIsAdding(false)
   };
@@ -42,6 +43,8 @@ export default function ProductCard({ product }) {
   const finalPrice = price - (price * discountPercent / 100);
 
   const imageSrc = imgError || !product.image ? FALLBACK : product.image;
+
+  const handleViewDetail = () => navigate(`/product/${product.id}`);
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
@@ -56,6 +59,7 @@ export default function ProductCard({ product }) {
             src={imageSrc}
             alt={product.name}
             className="w-full h-48 object-cover rounded-lg"
+            onClick={handleViewDetail}
             onError={() => setImgError(true)}
           />
         )}
@@ -83,7 +87,7 @@ export default function ProductCard({ product }) {
           </span>
         </div>
 
-        <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 mb-2 text-center">
+        <h3 onClick={handleViewDetail} className="text-sm font-semibold text-gray-800 line-clamp-2 mb-2 text-center">
           {product.name}
         </h3>
 

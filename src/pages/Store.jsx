@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -97,28 +97,48 @@ export default function Store() {
             .catch(() => {});
     }, []);
 
-    // ── Fetch filtered products ──────────────────────────────────────────────
-    const fetchProducts = async () => {
+    // ── Fetch filtered products optimized code ──────────────────────────────────────────────
+    const fetchProducts = useCallback(async ()=>{
         if (aiQuery) {
             setProducts([]);
             return;
         }
-
         setLoading(true);
         setError(null);
+        const controller = new AbortController();
         try {
-            const params = { page, limit };
-            if (selectedCategory) params.category = selectedCategory;
-            if (searchQuery)       params.search   = searchQuery;
+        setLoading(true);
+        setError(null);
 
-            const res = await api.get('/api/products', { params });
-            setProducts(res.products || []);
-        } catch (err) {
-            setError(err.message || 'Failed to load products');
-        } finally {
-            setLoading(false);
+        const params = {
+            page,
+            limit,
+            ...(selectedCategory && { category: selectedCategory }),
+            ...(searchQuery && { search: searchQuery }),
+        };
+
+        const res = await api.get("/api/products", {
+            params,
+            signal: controller.signal,
+        });
+
+        setProducts(res.products ?? []);
+    } catch (err) {
+        if (err.name !== "AbortError") {
+            setError(
+                err.response?.data?.message ||
+                err.message ||
+                "Failed to load products"
+            );
         }
-    };
+    } finally {
+        setLoading(false);
+    }
+
+    return () => controller.abort();
+}, [page, limit, selectedCategory, searchQuery, aiQuery]);
+    
+
 
     useEffect(() => {
         fetchProducts();
