@@ -61,6 +61,7 @@ export default function ProductCard({ product }) {
             className="w-full h-48 object-cover rounded-lg"
             onClick={handleViewDetail}
             onError={() => setImgError(true)}
+            loading="lazy"
           />
         )}
         {discountPercent > 0 && (
@@ -70,7 +71,7 @@ export default function ProductCard({ product }) {
         )}
         {/* Admin edit button — top-right corner of image */}
         {isAdmin && (
-          <button
+          <button aria-label="Edit product"
             onClick={() => navigate(`/admin/products/${product.id}/edit`)}
             title="Edit product"
             className="absolute top-2 right-2 bg-white border border-gray-200 text-gray-700 rounded-full p-1.5 shadow hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
@@ -124,7 +125,7 @@ export default function ProductCard({ product }) {
         </div>
       </div>
 
-      <button
+      <button aria-label="Add to Cart"
         onClick={handleAddToCart}
         disabled={product.stock === 0 || isAdding}
         className={`mt-auto flex items-center justify-center gap-2 py-2 rounded-lg font-medium transition-colors disabled:opacity-50

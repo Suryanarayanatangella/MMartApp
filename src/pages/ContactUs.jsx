@@ -99,7 +99,7 @@ export default function ContactUs() {
                   <p className="text-gray-500 mb-6">
                     Thanks for reaching out. We'll reply to <span className="font-medium text-gray-700">{form.email || 'your email'}</span> within 24 hours.
                   </p>
-                  <button
+                  <button aria-label="Send another message"
                     onClick={() => setSubmitted(false)}
                     className="text-sm text-blue-600 hover:underline"
                   >
@@ -110,7 +110,7 @@ export default function ContactUs() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -124,7 +124,7 @@ export default function ContactUs() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -140,7 +140,7 @@ export default function ContactUs() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                       Subject <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -155,7 +155,7 @@ export default function ContactUs() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                       Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
@@ -169,7 +169,7 @@ export default function ContactUs() {
                     />
                   </div>
 
-                  <button
+                  <button aria-label="Send message"
                     type="submit"
                     disabled={loading}
                     className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-60"

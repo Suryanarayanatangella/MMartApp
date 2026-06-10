@@ -38,7 +38,7 @@ const Login = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium mb-1">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
                         <input {...register("email")}
                             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="you@example.com" />
@@ -46,14 +46,14 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium mb-1">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
                         <input {...register("password")} type="password"
                             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="••••••••" />
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
                     </div>
 
-                    <button type="submit" disabled={loading}
+                    <button aria-label="Sign in" type="submit" disabled={loading}
                         className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50">
                         {loading ? "Signing in..." : "Sign In"}
                     </button>

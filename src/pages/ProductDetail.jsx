@@ -40,6 +40,7 @@ export default function ProductDetail() {
   const [reviewLoading, setReviewLoading] = useState(false);
   const [reviewError, setReviewError] = useState('');
   const [reviewSuccess, setReviewSuccess] = useState('');
+  const [canReview, setCanReview] = useState(false);
 
   // Fetch product
   useEffect(() => {
@@ -74,6 +75,23 @@ export default function ProductDetail() {
     };
     fetchReviews();
   }, [id]);
+
+  // Fetch eligibility for delivered product review
+  useEffect(() => {
+    const fetchEligibility = async () => {
+      if (!isLoggedIn) {
+        setCanReview(false);
+        return;
+      }
+      try {
+        const res = await api.get(`/api/reviews/eligible/${id}`);
+        setCanReview(res.eligible === true);
+      } catch {
+        setCanReview(false);
+      }
+    };
+    fetchEligibility();
+  }, [id, isLoggedIn]);
 
   const handleAddToCart = async () => {
     if (!isLoggedIn) {
@@ -143,7 +161,7 @@ export default function ProductDetail() {
         <Header />
         <div className="max-w-6xl mx-auto px-4 py-24 text-center">
           <p className="text-red-500 mb-4">{error || 'Product not found'}</p>
-          <button onClick={() => navigate('/store')} className="text-blue-600 hover:underline">
+          <button aria-label="Back to store" onClick={() => navigate('/store')} className="text-blue-600 hover:underline">
             ← Back to Store
           </button>
         </div>
@@ -158,7 +176,7 @@ export default function ProductDetail() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Back button */}
-        <button
+        <button aria-label="Go back"
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 mb-6 transition-colors"
         >
@@ -181,6 +199,7 @@ export default function ProductDetail() {
                 <img
                   src={selectedImage}
                   alt={product.name}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                   onError={() => setImgError(true)}
                 />
@@ -191,14 +210,14 @@ export default function ProductDetail() {
             {allImages.length > 1 && (
               <div className="flex gap-2 overflow-x-auto pb-1">
                 {allImages.map((img, i) => (
-                  <button
+                  <button aria-label={`View image ${i + 1}`}
                     key={i}
                     onClick={() => { setSelectedImage(img); setImgError(false); }}
                     className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
                       selectedImage === img ? 'border-blue-500' : 'border-gray-200 hover:border-gray-400'
                     }`}
                   >
-                    <img src={img} alt={`view ${i + 1}`} className="w-full h-full object-cover" />
+                    <img src={img} alt={`view ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -250,7 +269,7 @@ export default function ProductDetail() {
             <p className="text-sm text-gray-600 leading-relaxed mb-6">{product.description}</p>
 
             {/* Add to cart */}
-            <button
+            <button aria-label="Add to cart"
               onClick={handleAddToCart}
               disabled={product.stock === 0 || isAdding}
               className={`flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-white transition-colors disabled:opacity-50 mb-4 ${
@@ -333,7 +352,7 @@ export default function ProductDetail() {
               {!isLoggedIn ? (
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-700">
                   Please{' '}
-                  <button onClick={() => navigate('/login')} className="underline font-medium">
+                  <button aria-label="Log in" onClick={() => navigate('/login')} className="underline font-medium">
                     log in
                   </button>{' '}
                   to leave a review.
@@ -342,16 +361,20 @@ export default function ProductDetail() {
                 <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-sm text-green-700">
                   You've already reviewed this product. Thank you!
                 </div>
+              ) : !canReview ? (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-sm text-yellow-700">
+                  You can only review this product after it has been delivered.
+                </div>
               ) : (
                 <form onSubmit={handleSubmitReview} className="space-y-4">
                   {/* Star selector */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-1">
                       Your Rating <span className="text-red-500">*</span>
                     </label>
                     <div className="flex gap-1">
                       {[1, 2, 3, 4, 5].map(i => (
-                        <button
+                        <button aria-label={`Rate ${i} stars`}
                           key={i}
                           type="button"
                           onClick={() => setRating(i)}
@@ -374,10 +397,11 @@ export default function ProductDetail() {
 
                   {/* Comment */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-1">
                       Comment (optional)
                     </label>
                     <textarea
+                      id="comment"
                       value={comment}
                       onChange={e => setComment(e.target.value)}
                       rows={4}
@@ -393,7 +417,7 @@ export default function ProductDetail() {
                     <p className="text-sm text-green-600">{reviewSuccess}</p>
                   )}
 
-                  <button
+                  <button aria-label="Submit review"
                     type="submit"
                     disabled={reviewLoading}
                     className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-60"

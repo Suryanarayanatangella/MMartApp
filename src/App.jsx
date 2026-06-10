@@ -1,28 +1,28 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
 import './App.css'
 import Register from './pages/Register'
 import NoPage from './pages/NoPage'
-import Store from './pages/Store'
 import AdminProductForm from './pages/AdminProductForm'
-import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import OrderSuccessPage from './pages/OrderSuccssPage'
-import Categories from './pages/Categories'
-import AdminOrders from './pages/AdminOrders'
-import MyOrders from './pages/MyOrders'
 import ChatWidget from './pages/ChatWidget'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import ProductDetail from './pages/ProductDetail'
 
+const Store = React.lazy(() => import('./pages/Store'))
+const CartPage = React.lazy(() => import('./pages/CartPage'))
+const AdminOrders = React.lazy(() => import('./pages/AdminOrders'))
+const MyOrders = React.lazy(() => import('./pages/MyOrders'))
+const Categories = React.lazy(() => import('./pages/Categories'))
+
 function App() {
-  const Header = React.memo(() => {return <Header/>})
   return (
     <Router>
+      <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
@@ -42,6 +42,7 @@ function App() {
         <Route path='/product/:id' element={<ProductDetail />}/>
         <Route path="*" element={<NoPage />} />
       </Routes>
+      </Suspense>
       <ChatWidget /> 
     </Router>
   )

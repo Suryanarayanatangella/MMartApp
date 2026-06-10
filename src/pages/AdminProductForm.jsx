@@ -189,7 +189,7 @@ const AdminProductForm = () => {
           <h1 className="text-3xl font-bold">
             {isEdit ? 'Edit Product' : 'Add New Product'}
           </h1>
-          <button onClick={() => navigate('/store')}
+          <button aria-label="Back to store" onClick={() => navigate('/store')}
             className="text-sm text-gray-500 hover:text-gray-700 underline">
             ← Back to store
           </button>
@@ -210,7 +210,7 @@ const AdminProductForm = () => {
 
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium mb-2">Product Name</label>
+            <label htmlFor="name" className="block text-sm font-medium mb-2">Product Name</label>
             <input {...register('name')}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
@@ -218,7 +218,7 @@ const AdminProductForm = () => {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium mb-2">Description</label>
+            <label htmlFor="description" className="block text-sm font-medium mb-2">Description</label>
             <textarea {...register('description')} rows={5}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
@@ -227,23 +227,23 @@ const AdminProductForm = () => {
           {/* Price / Discount / Stock / Category */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Price (₹)</label>
+              <label htmlFor="price" className="block text-sm font-medium mb-2">Price (₹)</label>
               <input {...register('price')} placeholder="99.99"
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
               {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Discount (%)</label>
+              <label htmlFor="discount" className="block text-sm font-medium mb-2">Discount (%)</label>
               <input {...register('discount')} placeholder="0"
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Stock</label>
+              <label htmlFor="stock" className="block text-sm font-medium mb-2">Stock</label>
               <input {...register('stock')} placeholder="50"
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Category</label>
+              <label htmlFor="category" className="block text-sm font-medium mb-2">Category</label>
               <input {...register('category')} placeholder="Electronics"
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
               {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>}
@@ -252,22 +252,24 @@ const AdminProductForm = () => {
 
           {/* Main Image */}
           <div>
-            <label className="block text-sm font-medium mb-2">Main Image</label>
+            <label htmlFor="mainImage" className="block text-sm font-medium mb-2">Main Image</label>
             {mainPreview ? (
               <div className="relative inline-block">
                 <img src={mainPreview} alt="Main preview"
-                  className="w-40 h-40 object-cover rounded-lg border" />
-                <button type="button" onClick={removeMainImage}
+                  className="w-40 h-40 object-cover rounded-lg border"
+                  loading="lazy"
+                  alt="Main preview" />
+                <button aria-label="Remove main image" type="button" onClick={removeMainImage}
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600">
                   <X size={14} />
                 </button>
-                <button type="button" onClick={() => mainInputRef.current?.click()}
+                <button aria-label="Change main image" type="button" onClick={() => mainInputRef.current?.click()}
                   className="absolute bottom-1 right-1 bg-white border text-gray-600 rounded px-1.5 py-0.5 text-xs hover:bg-gray-50">
                   Change
                 </button>
               </div>
             ) : (
-              <button type="button" onClick={() => mainInputRef.current?.click()}
+              <button aria-label="Upload main image" type="button" onClick={() => mainInputRef.current?.click()}
                 className="flex flex-col items-center justify-center w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-gray-500 hover:text-blue-500">
                 <Upload size={28} className="mb-2" />
                 <span className="text-xs text-center">Click to upload<br />main image</span>
@@ -279,24 +281,25 @@ const AdminProductForm = () => {
 
           {/* Additional Images */}
           <div>
-            <label className="block text-sm font-medium mb-2">Additional Images</label>
+            <label htmlFor="additionalImages" className="block text-sm font-medium mb-2">Additional Images</label>
             <div className="flex flex-wrap gap-3">
               {addlImages.map(({ preview, existing }, i) => (
                 <div key={i} className="relative">
                   <img src={preview} alt={`img-${i}`}
+                    loading="lazy"
                     className="w-28 h-28 object-cover rounded-lg border" />
                   {existing && (
                     <span className="absolute bottom-1 left-1 bg-black bg-opacity-50 text-white text-xs px-1 rounded">
                       saved
                     </span>
                   )}
-                  <button type="button" onClick={() => removeAddlImage(i)}
+                  <button aria-label="Remove additional image" type="button" onClick={() => removeAddlImage(i)}
                     className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600">
                     <X size={14} />
                   </button>
                 </div>
               ))}
-              <button type="button" onClick={() => addlInputRef.current?.click()}
+              <button aria-label="Upload additional images" type="button" onClick={() => addlInputRef.current?.click()}
                 className="flex flex-col items-center justify-center w-28 h-28 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-gray-500 hover:text-blue-500">
                 <ImagePlus size={24} className="mb-1" />
                 <span className="text-xs">Add images</span>
@@ -307,7 +310,7 @@ const AdminProductForm = () => {
             <p className="text-xs text-gray-500 mt-2">Up to 10 images · Max 5 MB each · JPG, PNG, WebP</p>
           </div>
 
-          <button type="submit" disabled={isSubmitting}
+          <button aria-label="Submit form" type="submit" disabled={isSubmitting}
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 flex items-center justify-center gap-2">
             {isSubmitting && <Loader2 size={16} className="animate-spin" />}
             {isSubmitting

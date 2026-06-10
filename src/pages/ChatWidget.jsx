@@ -66,7 +66,7 @@ export default function ChatWidget() {
     return (
         <>
             {/* ── Floating button ──────────────────────────────── */}
-            <button
+            <button aria-label="Toggle chat widget"
                 onClick={() => setIsOpen(prev => !prev)}
                 className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all duration-200 flex items-center justify-center"
                 title="Chat with AI Support"
@@ -92,7 +92,7 @@ export default function ChatWidget() {
                             <p className="text-white font-semibold text-sm">M-Mart Assistant</p>
                             <p className="text-blue-100 text-xs">Powered by AI · Usually replies instantly</p>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="ml-auto text-white hover:text-blue-200">
+                        <button aria-label="Close chat" onClick={() => setIsOpen(false)} className="ml-auto text-white hover:text-blue-200">
                             <X size={18} />
                         </button>
                     </div>
@@ -137,7 +137,7 @@ export default function ChatWidget() {
                     {messages.length <= 2 && (
                         <div className="px-3 py-2 flex flex-wrap gap-1.5 border-t border-gray-100 bg-white">
                             {QUICK_REPLIES.map(q => (
-                                <button key={q}
+                                <button aria-label={`Quick reply: ${q}`} key={q}
                                     onClick={() => sendMessage(q)}
                                     className="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-2 py-1 rounded-full hover:bg-blue-100 transition-colors">
                                     {q}
@@ -158,7 +158,7 @@ export default function ChatWidget() {
                             className="flex-1 resize-none text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 max-h-24"
                             style={{ lineHeight: '1.4' }}
                         />
-                        <button
+                        <button aria-label="Send message"
                             onClick={() => sendMessage()}
                             disabled={!input.trim() || loading}
                             className="w-9 h-9 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 disabled:opacity-40 transition-colors flex-shrink-0"

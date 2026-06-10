@@ -58,14 +58,14 @@ const Register = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-sm font-medium mb-1">First Name</label>
+                            <label htmlFor="firstName" className="block text-sm font-medium mb-1">First Name</label>
                             <input {...register("firstName")}
                                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="First Name" />
                             {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
                         </div>
                         <div>
-                            <label className="block text-sm font-medium mb-1">Last Name</label>
+                            <label htmlFor="lastName" className="block text-sm font-medium mb-1">Last Name</label>
                             <input {...register("lastName")}
                                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Last Name" />
@@ -73,14 +73,14 @@ const Register = () => {
                         </div>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-1">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
                         <input {...register("email")}
                             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="you@example.com" />
                         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-1">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
                         <input {...register("password")}
                             type="password"
                             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -88,7 +88,7 @@ const Register = () => {
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
                     </div>
                     <div>
-                        <label className="flex items-center gap-2 text-sm">Phone Number</label>
+                        <label htmlFor="phone" className="block text-sm font-medium mb-1">Phone Number</label>
                         <input {...register("phone")}
                             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="123-456-7890" />
@@ -97,7 +97,7 @@ const Register = () => {
                     <div className="text-sm text-gray-600">
                         Already have an account? <a href="/login" className="text-blue-600 font-medium">Login</a>
                     </div>
-                    <button type="submit" disabled={loading}
+                    <button aria-label="Register" type="submit" disabled={loading}
                         className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50">
                         {loading ? "Registering..." : "Register"}
                     </button>

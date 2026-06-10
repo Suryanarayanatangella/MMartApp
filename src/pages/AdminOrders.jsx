@@ -99,7 +99,7 @@ export default function AdminOrders() {
                         <h1 className="text-3xl font-bold text-gray-900">Orders Management</h1>
                         <p className="text-gray-500 mt-1">{orders.length} orders {filterStatus ? `with status: ${filterStatus}` : 'total'}</p>
                     </div>
-                    <button
+                    <button aria-label="Refresh orders"
                         onClick={() => fetchOrders(filterStatus)}
                         className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-50"
                     >
@@ -110,7 +110,7 @@ export default function AdminOrders() {
                 {/* Status summary cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
                     {ALL_STATUSES.map(s => (
-                        <button
+                        <button aria-label={`Filter by status: ${s}`}
                             key={s}
                             onClick={() => setFilterStatus(filterStatus === s ? '' : s)}
                             className={`p-3 rounded-xl text-center border-2 transition-all ${
@@ -204,7 +204,7 @@ export default function AdminOrders() {
                                     </div>
                                     {/* View Bill button */}
                                     <div onClick={e => e.stopPropagation()}>
-                                        <button
+                                        <button aria-label="View bill"
                                             onClick={() => setBillOrders(order)}
                                             className="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded-full hover:bg-indigo-700 transition-colors"
                                         >
@@ -229,6 +229,7 @@ export default function AdminOrders() {
                                                                 alt={item.product?.name}
                                                                 className="w-10 h-10 object-cover rounded-lg flex-shrink-0"
                                                                 onError={e => { e.target.src = 'https://placehold.co/48x48'; }}
+                                                                loading="lazy"
                                                             />
                                                             <div className="flex-1 min-w-0">
                                                                 <p className="text-sm font-medium text-gray-800 line-clamp-1">

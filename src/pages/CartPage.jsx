@@ -121,7 +121,7 @@ import {
                     <ShoppingBag size={64} className="mx-auto text-gray-300 mb-6" />
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Your cart is empty</h2>
                     <p className="text-gray-500 mb-8">Looks like you haven't added anything yet.</p>
-                    <button
+                    <button aria-label="Continue shopping"
                         onClick={() => navigate('/store')}
                         className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700"
                     >
@@ -146,7 +146,7 @@ import {
                             ({totalItems} item{totalItems !== 1 ? 's' : ''})
                         </span>
                     </h1>
-                    <button
+                    <button aria-label="Continue shopping"
                         onClick={() => navigate('/store')}
                         className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
                     >
@@ -182,6 +182,7 @@ import {
                                             alt={item.product.name}
                                             className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
                                             onClick={() => navigate(`/product/${item.product.id}`)}
+                                            loading="lazy"
                                             onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=No+Image'; }}
                                         />
 
@@ -209,7 +210,7 @@ import {
 
                                         {/* Quantity controls */}
                                         <div className="flex items-center gap-2">
-                                            <button
+                                            <button aria-label="Decrease quantity" 
                                                 onClick={() => handleDecrease(item)}
                                                 className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
                                             >
@@ -218,7 +219,7 @@ import {
                                             <span className="w-8 text-center font-semibold text-gray-900">
                                                 {item.quantity}
                                             </span>
-                                            <button
+                                            <button aria-label="Increase quantity"
                                                 onClick={() => handleIncrease(item)}
                                                 className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
                                             >
@@ -234,7 +235,7 @@ import {
                                         </div>
 
                                         {/* Remove button */}
-                                        <button
+                                        <button aria-label="Remove item" 
                                             onClick={() => handleRemove(item.id)}
                                             className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                                             title="Remove item"
@@ -247,7 +248,7 @@ import {
 
                             {/* Clear cart */}
                             <div className="text-right">
-                                <button
+                                <button aria-label="Clear entire cart"
                                     onClick={handleClearCart}
                                     className="text-sm text-red-500 hover:underline"
                                 >
@@ -294,14 +295,14 @@ import {
                                     </p>
                                 )}
 
-                                <button
+                                <button aria-label="Proceed to checkout"
                                     onClick={handleCheckout}
                                     className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                                 >
                                     Proceed to Checkout
                                 </button>
 
-                                <button
+                                <button aria-label="Continue shopping"
                                     onClick={() => navigate('/store')}
                                     className="w-full mt-3 border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
                                 >

@@ -48,7 +48,7 @@ export default function BundleCard({ bundle, onAddToCart }) {
 
             {/* Products Mini List */}
             <div className="mb-3">
-                <button
+                <button aria-label="View Product Items"
                     onClick={() => setExpanded(!expanded)}
                     className="flex items-center gap-1 text-xs text-gray-600 hover:text-gray-800 font-medium"
                 >
@@ -85,6 +85,7 @@ export default function BundleCard({ bundle, onAddToCart }) {
                                 alt={product.name}
                                 className="w-full h-full object-cover rounded"
                                 title={product.name}
+                                loading="lazy"
                             />
                         </div>
                     ))}
@@ -97,7 +98,7 @@ export default function BundleCard({ bundle, onAddToCart }) {
             )}
 
             {/* Add Bundle Button */}
-            <button
+            <button aria-label="Add Bundle to Cart"
                 onClick={handleAddBundle}
                 className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 rounded flex items-center justify-center gap-2 transition-colors"
             >

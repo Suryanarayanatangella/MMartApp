@@ -105,7 +105,7 @@ export default function Header() {
               <SmartSearchBar className="hidden lg:flex w-64" />
 
               {/* Bell */}
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <button aria-label="Notifications" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <Bell size={20} className="text-gray-700" />
               </button>
 
@@ -113,7 +113,7 @@ export default function Header() {
               <div className="relative" ref={userMenuRef}>
                 {isLoggedIn ? (
                   <>
-                    <button
+                    <button aria-label="User Menu" 
                       onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                       className="flex items-center gap-1.5 p-2 hover:bg-gray-100 rounded-lg transition-colors"
                     >
@@ -166,7 +166,7 @@ export default function Header() {
                         <hr className="my-1 border-gray-100" />
 
                         {/* Sign out */}
-                        <button
+                        <button aria-label="Sign out"
                           onClick={handleSignOut}
                           className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                         >
@@ -177,7 +177,7 @@ export default function Header() {
                     )}
                   </>
                 ) : (
-                  <button
+                  <button aria-label="Sign in"
                     onClick={() => navigate('/login')}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                   >
@@ -187,7 +187,7 @@ export default function Header() {
               </div>
 
               {/* Cart */}
-              <button
+              <button aria-label="Cart"
                 onClick={() => navigate('/cart')}
                 className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
@@ -200,7 +200,7 @@ export default function Header() {
               </button>
 
               {/* Mobile Menu Button */}
-              <button
+              <button aria-label="Mobile Menu"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
@@ -229,7 +229,7 @@ export default function Header() {
 
             {/* Mobile sign out */}
             {isLoggedIn && (
-              <button
+              <button aria-label="Sign out"
                 onClick={handleSignOut}
                 className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
               >

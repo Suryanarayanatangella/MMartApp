@@ -19,6 +19,7 @@ export default function UpsellCard({ upsell, onAddToCart }) {
                         src={product.image || product.images?.[0] || '/placeholder.jpg'}
                         alt={product.name}
                         className="w-full h-full object-cover rounded"
+                        loading="lazy"
                     />
                 </div>
 
@@ -41,7 +42,7 @@ export default function UpsellCard({ upsell, onAddToCart }) {
                                 </span>
                             )}
                         </div>
-                        <button
+                        <button aria-label="Add to Cart"
                             onClick={handleAdd}
                             className="p-1.5 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
                             title="Add to cart"

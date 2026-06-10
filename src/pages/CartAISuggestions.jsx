@@ -32,7 +32,7 @@ export default function CartAISuggestions({ suggestions, loading, onRefresh }) {
                         Powered by Gemini
                     </span>
                 </div>
-                <button onClick={onRefresh}
+                <button aria-label="Refresh suggestions" onClick={onRefresh}
                     className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-600 transition-colors">
                     <RefreshCw size={13} /> Refresh
                 </button>
@@ -52,6 +52,7 @@ export default function CartAISuggestions({ suggestions, loading, onRefresh }) {
                                     alt={u.product.name}
                                     className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
                                     onError={e => { e.target.src = 'https://placehold.co/64x64'; }}
+                                    loading="lazy"
                                 />
                                 <div className="flex-1 min-w-0">
                                     <p className="text-xs text-blue-600 font-medium mb-0.5">{u.product.category}</p>
@@ -61,7 +62,7 @@ export default function CartAISuggestions({ suggestions, loading, onRefresh }) {
                                         <span className="text-sm font-bold text-gray-900">
                                             ₹{Number(u.product.price).toFixed(2)}
                                         </span>
-                                        <button
+                                        <button aria-label="Add to cart" onClick={() => dispatch(addToCart(u.product.id))}
                                             onClick={() => dispatch(addToCart(u.product.id))}
                                             className="flex items-center gap-1 text-xs bg-blue-600 text-white px-2.5 py-1 rounded-lg hover:bg-blue-700 transition-colors"
                                         >
@@ -105,11 +106,12 @@ export default function CartAISuggestions({ suggestions, loading, onRefresh }) {
                                                 alt={p.name}
                                                 className="w-6 h-6 object-cover rounded"
                                                 onError={e => { e.target.src = 'https://placehold.co/24x24'; }} />
+                                                loading="lazy"
                                             <span className="text-xs font-medium text-gray-800 line-clamp-1 max-w-[100px]">{p.name}</span>
                                         </div>
                                     ))}
                                 </div>
-                                <button
+                                <button aria-label="Add bundle to cart"
                                     onClick={() => b.products.forEach(p => dispatch(addToCart(p.id)))}
                                     className="mt-3 w-full flex items-center justify-center gap-2 bg-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
                                 >

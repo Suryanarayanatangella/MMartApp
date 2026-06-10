@@ -130,7 +130,7 @@ import api from '../api/api';
 //                     <p className="text-gray-500">📞 {savedAddress.shippingPhone}</p>
 //                 </div>
 //             </div>
-//             <button
+//             <button aria-label="Edit delivery address"
 //                 type="button"
 //                 onClick={() => setEditingAddress(true)}
 //                 className="flex items-center gap-1.5 text-xs text-blue-600 hover:underline flex-shrink-0"
@@ -174,7 +174,7 @@ import api from '../api/api';
 //                                     {savedAddress && editingAddress && (
 //                                         <div className="flex items-center justify-between text-sm">
 //                                             <span className="text-gray-500">Edit your delivery address below</span>
-//                                             <button
+//                                             <button aria-label="Edit delivery address" type="button"
 //                                                 type="button"
 //                                                 onClick={() => { reset(savedAddress); setEditingAddress(false); }}
 //                                                 className="text-blue-600 hover:underline text-xs"
@@ -185,7 +185,7 @@ import api from '../api/api';
 //                                     )}
 
 //                                     <div>
-//                                         <label className="block text-sm font-medium mb-1">Full Address</label>
+//                                         <label htmlFor="shippingAddress" className="block text-sm font-medium mb-1">Full Address</label>
 //                                         <textarea {...register('shippingAddress')} rows={3}
 //                                             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 //                                             placeholder="House no, Street, Area" />
@@ -194,28 +194,28 @@ import api from '../api/api';
 
 //                                     <div className="grid grid-cols-2 gap-4">
 //                                         <div>
-//                                             <label className="block text-sm font-medium mb-1">City</label>
+//                                             <label htmlFor="shippingCity" className="block text-sm font-medium mb-1">City</label>
 //                                             <input {...register('shippingCity')}
 //                                                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 //                                                 placeholder="Hyderabad" />
 //                                             {errors.shippingCity && <p className="text-red-500 text-xs mt-1">{errors.shippingCity.message}</p>}
 //                                         </div>
 //                                         <div>
-//                                             <label className="block text-sm font-medium mb-1">State</label>
+//                                             <label htmlFor="shippingState" className="block text-sm font-medium mb-1">State</label>
 //                                             <input {...register('shippingState')}
 //                                                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 //                                                 placeholder="Telangana" />
 //                                             {errors.shippingState && <p className="text-red-500 text-xs mt-1">{errors.shippingState.message}</p>}
 //                                         </div>
 //                                         <div>
-//                                             <label className="block text-sm font-medium mb-1">PIN Code</label>
+//                                             <label htmlFor="shippingZip" className="block text-sm font-medium mb-1">PIN Code</label>
 //                                             <input {...register('shippingZip')}
 //                                                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 //                                                 placeholder="500001" />
 //                                             {errors.shippingZip && <p className="text-red-500 text-xs mt-1">{errors.shippingZip.message}</p>}
 //                                         </div>
 //                                         <div>
-//                                             <label className="block text-sm font-medium mb-1">Phone</label>
+//                                             <label htmlFor="shippingPhone" className="block text-sm font-medium mb-1">Phone</label>
 //                                             <input {...register('shippingPhone')}
 //                                                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 //                                                 placeholder="9876543210" />
@@ -271,7 +271,7 @@ import api from '../api/api';
 //                                     </div>
 //                                 </div>
 
-//                                 <button type="submit" disabled={paying}
+//                                 <button aria-label="Proceed to payment" type="submit" disabled={paying}
 //                                     className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-60 flex items-center justify-center gap-2 transition-colors">
 //                                     {paying
 //                                         ? <><Loader2 size={18} className="animate-spin" /> Processing...</>
@@ -410,7 +410,7 @@ export default function CheckoutPage() {
                             <h2 className="text-lg font-bold text-gray-900 mb-2">Shipping Details</h2>
 
                             <div>
-                                <label className="block text-sm font-medium mb-1">Full Address</label>
+                                <label htmlFor="shippingAddress" className="block text-sm font-medium mb-1">Full Address</label>
                                 <textarea {...register('shippingAddress')} rows={3}
                                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="House no, Street, Area" />
@@ -419,28 +419,28 @@ export default function CheckoutPage() {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">City</label>
+                                    <label htmlFor="shippingCity" className="block text-sm font-medium mb-1">City</label>
                                     <input {...register('shippingCity')}
                                         className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         placeholder="Hyderabad" />
                                     {errors.shippingCity && <p className="text-red-500 text-xs mt-1">{errors.shippingCity.message}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">State</label>
+                                    <label htmlFor="shippingState" className="block text-sm font-medium mb-1">State</label>
                                     <input {...register('shippingState')}
                                         className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         placeholder="Telangana" />
                                     {errors.shippingState && <p className="text-red-500 text-xs mt-1">{errors.shippingState.message}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">PIN Code</label>
+                                    <label htmlFor="shippingZip" className="block text-sm font-medium mb-1">PIN Code</label>
                                     <input {...register('shippingZip')}
                                         className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         placeholder="500001" />
                                     {errors.shippingZip && <p className="text-red-500 text-xs mt-1">{errors.shippingZip.message}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Phone</label>
+                                    <label htmlFor="shippingPhone" className="block text-sm font-medium mb-1">Phone</label>
                                     <input {...register('shippingPhone')}
                                         className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         placeholder="9876543210" />
@@ -464,6 +464,7 @@ export default function CheckoutPage() {
                                             <div key={item.id} className="flex items-center gap-3">
                                                 <img src={item.product.image || 'https://placehold.co/48x48'}
                                                     alt={item.product.name}
+                                                    loading="lazy"
                                                     className="w-12 h-12 object-cover rounded-lg flex-shrink-0" />
                                                 <div className="flex-1 min-w-0">
                                                     <p className="text-xs font-medium text-gray-800 line-clamp-1">{item.product.name}</p>
@@ -495,7 +496,7 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
 
-                                <button type="submit" disabled={paying}
+                                <button aria-label="Proceed to payment" type="submit" disabled={paying}
                                     className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-60 flex items-center justify-center gap-2 transition-colors">
                                     {paying
                                         ? <><Loader2 size={18} className="animate-spin" /> Processing...</>

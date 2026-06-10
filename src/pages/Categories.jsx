@@ -125,6 +125,7 @@ export default function Categories() {
                                         src={cat.image}
                                         alt={cat.name}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        loading="lazy"
                                         onError={(e) => { e.target.src = DEFAULT_IMAGE; }}
                                     />
                                     {/* Dark overlay */}

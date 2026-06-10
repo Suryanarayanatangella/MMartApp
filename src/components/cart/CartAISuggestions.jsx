@@ -44,7 +44,7 @@ export default function CartAISuggestions({ cartItems, onAddToCart }) {
     return (
         <div className="mt-8 border-t pt-6">
             {/* Header */}
-            <button
+            <button aria-label="AI Recommendations"
                 onClick={() => setExpanded(!expanded)}
                 className="flex items-center justify-between w-full mb-4 group"
             >

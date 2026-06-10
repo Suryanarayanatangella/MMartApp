@@ -21,11 +21,11 @@ export default function OrderSuccessPage() {
                     </p>
                 )}
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <button onClick={() => navigate('/store')}
+                    <button aria-label="Continue shopping" onClick={() => navigate('/store')}
                         className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700">
                         Continue Shopping
                     </button>
-                    <button onClick={() => navigate('/orders')}
+                    <button aria-label="View orders" onClick={() => navigate('/orders')}
                         className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-50">
                         View Orders
                     </button>

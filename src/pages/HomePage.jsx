@@ -89,11 +89,11 @@ export default function HomePage() {
                 Shop from our exclusive collection of high-quality products at unbeatable prices. Find everything you need in one place.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
+                <button aria-label="Shop now" className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
                   Shop Now
                   <ArrowRight size={20} className="ml-2" />
                 </button>
-                <button className="btn-outline border-white text-white hover:bg-white hover:bg-opacity-10 hover:text-blue-600">
+                <button aria-label="Learn more" className="btn-outline border-white text-white hover:bg-white hover:bg-opacity-10 hover:text-blue-600">
                   Learn More
                 </button>
               </div>
@@ -104,6 +104,7 @@ export default function HomePage() {
               <img
                 src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop"
                 alt="Hero"
+                loading="lazy"
                 className="rounded-lg shadow-2xl"
               />
               <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-blue-600 to-transparent opacity-20"></div>
@@ -188,6 +189,7 @@ export default function HomePage() {
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
+                    loading="lazy"
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
@@ -210,7 +212,7 @@ export default function HomePage() {
           <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8">
             Explore thousands of products and find exactly what you're looking for
           </p>
-          <button className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
+          <button aria-label="Shop now" className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
             Shop Now
             <ArrowRight size={20} className="ml-2" />
           </button>

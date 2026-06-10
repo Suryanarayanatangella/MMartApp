@@ -13,13 +13,13 @@ export default function BillModal({order, onClose}) {
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 print:hidden">
                     <h2 className="text-lg font-bold text-gray-900">Order Bill</h2>
                     <div className="flex items-center gap-3">
-                        <button
+                        <button aria-label="Print bill"
                             onClick={handlePrint}
                             className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700"
                         >
                             🖨️ Print
                         </button>
-                        <button
+                        <button aria-label="Close modal"
                             onClick={onClose}
                             className="text-gray-400 hover:text-gray-700 text-2xl leading-none"
                         >

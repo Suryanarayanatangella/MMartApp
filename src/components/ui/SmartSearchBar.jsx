@@ -78,7 +78,7 @@ return (
 
                 {/* Clear button */}
                 {query && (
-                    <button
+                    <button aria-label="Clear search"
                         type="button"
                         onClick={() => { setQuery(''); setIsAI(false); inputRef.current?.focus(); }}
                         className="text-gray-400 hover:text-gray-600 flex-shrink-0"

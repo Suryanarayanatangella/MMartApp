@@ -181,11 +181,11 @@ export default function Store() {
                         1024: { slidesPerView: 1 },
                     }}
                 >
-                    <SwiperSlide><img src={crockeryBrands}   alt="Crockery Brands"   className="w-full h-auto" /></SwiperSlide>
-                    <SwiperSlide><img src={detergentBrands}  alt="Detergent Brands"  className="w-full h-auto" /></SwiperSlide>
-                    <SwiperSlide><img src={diaperBrands}     alt="Diaper Brands"     className="w-full h-auto" /></SwiperSlide>
-                    <SwiperSlide><img src={halfpriceStore}   alt="Half Price Store"  className="w-full h-auto" /></SwiperSlide>
-                    <SwiperSlide><img src={riceBrands}       alt="Rice Brands"       className="w-full h-auto" /></SwiperSlide>
+                    <SwiperSlide><img src={crockeryBrands}   alt="Crockery Brands" loading="lazy" className="w-full h-auto" /></SwiperSlide>
+                    <SwiperSlide><img src={detergentBrands}  alt="Detergent Brands"  loading="lazy" className="w-full h-auto" /></SwiperSlide>
+                    <SwiperSlide><img src={diaperBrands}     alt="Diaper Brands"     loading="lazy" className="w-full h-auto" /></SwiperSlide>
+                    <SwiperSlide><img src={halfpriceStore}   alt="Half Price Store"  loading="lazy" className="w-full h-auto" /></SwiperSlide>
+                    <SwiperSlide><img src={riceBrands}       alt="Rice Brands"       loading="lazy" className="w-full h-auto" /></SwiperSlide>
                 </Swiper>
             </div>
 
@@ -216,7 +216,7 @@ export default function Store() {
                                     </p>
                                 </div>
                             </div>
-                            <button
+                            <button aria-label="Clear AI search"
                                 onClick={clearAISearch}
                                 className="flex items-center gap-1 text-xs text-purple-600 hover:underline flex-shrink-0"
                             >
@@ -248,14 +248,14 @@ export default function Store() {
                         {/* Sidebar categories */}
                         <div className="grid-20">
                             <div className="flex flex-col gap-2 mr-4 sticky top-24">
-                                <button
+                                <button aria-label="Select all categories"
                                     onClick={() => { setSelectedCategory(''); setPage(1); }}
                                     className={`px-3 py-1 rounded text-left ${selectedCategory === '' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
                                 >
                                     All
                                 </button>
                                 {categories.map(cat => (
-                                    <button
+                                    <button aria-label={`Select category: ${cat}`}
                                         key={cat}
                                         onClick={() => { setSelectedCategory(cat); setPage(1); }}
                                         className={`px-3 py-1 rounded text-left ${selectedCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
@@ -280,7 +280,7 @@ export default function Store() {
                                             <span className="font-semibold text-blue-700">"{searchQuery}"</span>
                                             {' '}— {products.length} product{products.length !== 1 ? 's' : ''} found
                                         </p>
-                                        <button
+                                        <button aria-label="Clear search"
                                             onClick={() => { navigate('/store'); setPage(1); }}
                                             className="text-xs text-blue-600 hover:underline"
                                         >
@@ -310,7 +310,7 @@ export default function Store() {
                                             <div key={cat} className="mb-10">
                                                 <div className="flex items-center justify-between mb-4">
                                                     <h3 className="text-lg font-semibold text-gray-800">{cat}</h3>
-                                                    <button
+                                                    <button aria-label={`View all products in category ${cat}`}
                                                         onClick={() => { setSelectedCategory(cat); navigate('/store'); }}
                                                         className="text-xs text-blue-600 hover:underline"
                                                     >
@@ -355,7 +355,7 @@ export default function Store() {
                                             <div key={cat} className="mb-10">
                                                 <div className="flex items-center justify-between mb-4">
                                                     <h3 className="text-lg font-semibold text-gray-800">{cat}</h3>
-                                                    <button
+                                                    <button aria-label="View all products in category"
                                                         onClick={() => { setSelectedCategory(cat); setPage(1); }}
                                                         className="text-xs text-blue-600 hover:underline"
                                                     >

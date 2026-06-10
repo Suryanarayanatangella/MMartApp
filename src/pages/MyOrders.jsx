@@ -108,7 +108,7 @@ export default function MyOrders() {
                         <ShoppingBag size={56} className="mx-auto mb-4 opacity-30" />
                         <p className="text-lg font-medium text-gray-600 mb-2">No orders yet</p>
                         <p className="text-sm mb-6">You haven't placed any orders. Start shopping!</p>
-                        <button
+                        <button aria-label="Browse store"
                             onClick={() => navigate('/store')}
                             className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700"
                         >
@@ -185,6 +185,7 @@ export default function MyOrders() {
                                                                 src={item.product?.image || 'https://placehold.co/56x56'}
                                                                 alt={item.product?.name}
                                                                 className="w-14 h-14 object-cover rounded-xl flex-shrink-0"
+                                                                loading="lazy"
                                                                 onError={e => { e.target.src = 'https://placehold.co/56x56'; }}
                                                             />
                                                             <div className="flex-1 min-w-0">
