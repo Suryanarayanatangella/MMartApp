@@ -21,10 +21,10 @@ export const loginUser = createAsyncThunk('auth/login',
 // Async thunk — Register
 export const registerUser = createAsyncThunk(
     "auth/register",
-    async ({ firstName, lastName, email, password }, { rejectWithValue }) => {
+    async ({ firstName, lastName, email, password, phone }, { rejectWithValue }) => {
         try {
             const res = await axios.post(`${API_BASE}/auth/register`, {
-                firstName, lastName, email, password
+                firstName, lastName, email, password, phone
             });
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -37,9 +37,9 @@ export const registerUser = createAsyncThunk(
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: JSON.parse(localStorage.getItem('user')) || null,
-        token: localStorage.getItem('token') || null,
-        loading: false, 
+        user: JSON.parse(localStorage.getItem('user') || 'null'),
+        token: localStorage.getItem('token'),
+        loading: false,
         error: null
     },
     reducers: { 

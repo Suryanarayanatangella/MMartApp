@@ -14,7 +14,7 @@ export default function UpsellCard({ upsell, onAddToCart }) {
         <div className="border border-purple-200 bg-purple-50 rounded-lg p-3 hover:shadow-md transition-shadow">
             <div className="flex gap-3">
                 {/* Product Image */}
-                <div className="w-16 h-16 flex-shrink-0">
+                <div className="w-16 h-16 shrink-0">
                     <img
                         src={product.image || product.images?.[0] || '/placeholder.jpg'}
                         alt={product.name}

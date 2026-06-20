@@ -105,8 +105,8 @@ export default function CartAISuggestions({ suggestions, loading, onRefresh }) {
                                             <img src={p.image || 'https://placehold.co/24x24'}
                                                 alt={p.name}
                                                 className="w-6 h-6 object-cover rounded"
-                                                onError={e => { e.target.src = 'https://placehold.co/24x24'; }} />
                                                 loading="lazy"
+                                                onError={e => { e.target.src = 'https://placehold.co/24x24'; }} />
                                             <span className="text-xs font-medium text-gray-800 line-clamp-1 max-w-[100px]">{p.name}</span>
                                         </div>
                                     ))}
