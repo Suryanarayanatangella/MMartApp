@@ -11,15 +11,7 @@ export default function SmartSearchBar({ onResults, className = '' }) {
     const navigate = useNavigate();
     const inputRef = useRef(null);
 
-    // const looksNatural = (text) => shouldUseAISearch(text);
-    // ✅ inline logic — no backend import needed
-        const looksNatural = (text) => {
-        const words = text.trim().split(/\s+/);
-        // More than 2 words, or contains price/natural language keywords → AI search
-        if (words.length > 2) return true;
-        const naturalKeywords = /under|below|cheap|budget|affordable|premium|best|healthy|organic|fresh|good/i;
-        return naturalKeywords.test(text);
-        };
+    const looksNatural = (text) => shouldUseAISearch(text);
 
     const handleSearch = async (e) => {
         e.preventDefault();
