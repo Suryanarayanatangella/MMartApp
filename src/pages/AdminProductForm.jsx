@@ -158,12 +158,10 @@ const AdminProductForm = () => {
   if (!user || user.role !== 'ADMIN') {
     return (
       <div>
-        <Header />
         <main className="max-w-4xl mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-semibold mb-4">Access denied</h1>
           <p className="text-gray-600">You must be an admin to view this page.</p>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -171,20 +169,17 @@ const AdminProductForm = () => {
   if (loadingProduct) {
     return (
       <div>
-        <Header />
         <main className="max-w-4xl mx-auto px-4 py-16 flex items-center justify-center">
           <Loader2 size={32} className="animate-spin text-blue-600" />
           <span className="ml-3 text-gray-600">Loading product...</span>
         </main>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div>
-      <Header />
-      <main className="max-w-4xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">
             {isEdit ? 'Edit Product' : 'Add New Product'}
@@ -319,7 +314,6 @@ const AdminProductForm = () => {
           </button>
         </form>
       </main>
-      <Footer />
     </div>
   );
 };

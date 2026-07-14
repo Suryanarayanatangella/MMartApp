@@ -55,10 +55,6 @@ export default function Header() {
     { name: 'Categories', href: '/categories' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
-    ...(user?.role === 'ADMIN' ? [
-      { name: 'Add Product', href: '/admin/products/new' },
-      { name: 'Orders', href: '/admin/orders' },
-] : [])
   ];
 
   const handleSearch = (e) => {
@@ -150,6 +146,13 @@ export default function Header() {
                         >
                           My Orders
                         </Link>
+                        {user?.role === 'ADMIN' && (<Link
+                          to="/admin/orders"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                          Admin Orders
+                        </Link>)}
                         <Link
                           to="/cart"
                           onClick={() => setIsUserMenuOpen(false)}

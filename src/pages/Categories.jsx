@@ -66,9 +66,7 @@ export default function Categories() {
     }, []);
 
     const handleCategoryClick = (categoryName) => {
-        if(isLoggedIn) {
-            navigate(`/store?category=${encodeURIComponent(categoryName)}`);
-        } else return navigate('/login');
+        navigate(`/store?category=${encodeURIComponent(categoryName)}`);
     };
 
     return (

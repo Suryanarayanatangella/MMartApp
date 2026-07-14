@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Search, Sparkles, X, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api  from './../../api/api';
+import { shouldUseAISearch } from '../../../backend/utils/searchIntent.js';
 
 export default function SmartSearchBar({ onResults, className = '' }) {
     const [query, setQuery] = useState('');
@@ -10,10 +11,7 @@ export default function SmartSearchBar({ onResults, className = '' }) {
     const navigate = useNavigate();
     const inputRef = useRef(null);
 
-    const looksNatural = (text) => {
-        const naturalPatterns = /under|below|above|cheap|affordable|premium|healthy|best|good|for|with|around|₹|\d+/i;
-        return naturalPatterns.test(text) || text.trim().split(' ').length >= 3;
-    }
+    const looksNatural = (text) => shouldUseAISearch(text);
 
     const handleSearch = async (e) => {
         e.preventDefault();

@@ -89,11 +89,8 @@ export default function AdminOrders() {
     }, {});
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <Header />
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-                {/* Page header */}
+        <div className="min-h-scree">
+            {/* Page header */}
                 <div className="flex items-center justify-between mb-6">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-900">Orders Management</h1>
@@ -106,7 +103,7 @@ export default function AdminOrders() {
                         <RefreshCw size={16} /> Refresh
                     </button>
                 </div>
-
+                
                 {/* Status summary cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
                     {ALL_STATUSES.map(s => (
@@ -282,8 +279,7 @@ export default function AdminOrders() {
                         ))}
                     </div>
                 )}
-            </main>
-            <Footer />
+                
             <BillModal order={billOrders} onClose={() => setBillOrders(null)} />
         </div>
     );

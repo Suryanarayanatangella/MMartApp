@@ -2,9 +2,11 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, selectAuthError, selectAuthLoading } from '../store/authSlice';
+import { loginUser, selectAuthError, selectAuthLoading, selectCurrentUser } from '../store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 const authSchema = z.object({
     email: z.string().email('Invalid email address'),
     password: z.string().min(6, 'Password must be at least 6 characters')
@@ -13,17 +15,30 @@ const authSchema = z.object({
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(selectCurrentUser);
+    console.log(user)
+    const isAdmin = user?.role === 'ADMIN';
+    console.log(isAdmin)
     const loading = useSelector(selectAuthLoading);
     const error = useSelector(selectAuthError);
+    const [showPassword, setShowPassword] = useState(false);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(authSchema)
     });
+    
+    useEffect(() => {
+        if (!user) return;
+
+        if (user.role === "ADMIN") {
+            navigate("/admin");
+        } else {
+            navigate("/store");
+        }
+    }, [user, navigate]);
+
     const onSubmit = (data) => {
-        dispatch(loginUser(data)).then((res) => {
-            if (res.type === 'auth/login/fulfilled') {  
-                navigate('/store');
-            }   
-        });
+        dispatch(loginUser(data));
     };
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -47,9 +62,22 @@ const Login = () => {
 
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
-                        <input {...register("password")} type="password"
-                            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="••••••••" />
+                        <div className="relative">
+                            <input
+                                {...register("password")}
+                                type={showPassword ? 'text' : 'password'}
+                                className="w-full border rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="••••••••"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(prev => !prev)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
                     </div>
 
