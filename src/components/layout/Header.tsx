@@ -16,6 +16,7 @@ import {
   logout
 } from '../../store/authSlice';
 import SmartSearchBar from '../ui/SmartSearchBar';
+import api from '../../api/api';
 
 // ── Nav link shape ────────────────────────────────────────────────────────
 
@@ -64,11 +65,18 @@ export default function Header() {
 
   // ── Handlers ──────────────────────────────────────────────────────────
 
-  const handleSignOut = (): void => {
-    dispatch(logout());
-    dispatch(clearCart());
-    setIsUserMenuOpen(false);
-    navigate('/');
+  const handleSignOut = async (): Promise<void> => {
+    try {
+      // Tell backend to clear the HTTP-only refresh token cookie
+      await api.post('/auth/logout');
+    } catch {
+      // Ignore errors — we still log out locally
+    } finally {
+      dispatch(logout());
+      dispatch(clearCart());
+      setIsUserMenuOpen(false);
+      navigate('/');
+    }
   };
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {

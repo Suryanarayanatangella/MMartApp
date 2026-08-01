@@ -20,8 +20,7 @@ import diaperBrands    from '../assets/images/diapper-brands.jpg';
 import halfpriceStore  from '../assets/images/halfprice-store.jpg';
 import riceBrands      from '../assets/images/Rice-brands.jpg';
 
-import type { Product, AISearchResult } from '../types/index';
-
+import type { Product, AISearchResult } from '../index';
 // ── Component ─────────────────────────────────────────────────────────────
 
 export default function Store() {
@@ -86,16 +85,15 @@ export default function Store() {
   }, []);
 
   // Fetch filtered products
-  const fetchProducts = useCallback(async (): Promise<void> => {
+  const fetchProducts = useCallback(async (signal: AbortSignal): Promise<void> => {
     if (aiQuery) { setProducts([]); return; }
     setLoading(true);
     setError(null);
-    const controller = new AbortController();
     try {
       const params: Record<string, unknown> = { page, limit };
       if (selectedCategory) params.category = selectedCategory;
       if (searchQuery)       params.search   = searchQuery;
-      const res = await api.get('/api/products', { params, signal: controller.signal });
+      const res = await api.get('/api/products', { params, signal });
       setProducts((res as unknown as { products: Product[] }).products ?? []);
     } catch (err) {
       if (err instanceof Error && err.name !== 'AbortError') {
@@ -104,10 +102,13 @@ export default function Store() {
     } finally {
       setLoading(false);
     }
-    return () => controller.abort();
   }, [page, limit, selectedCategory, searchQuery, aiQuery]);
 
-  useEffect(() => { fetchProducts(); }, [fetchProducts]);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchProducts(controller.signal);
+    return () => controller.abort();
+  }, [fetchProducts]);
 
   const handleAIResults = (res: AISearchResult): void => {
     setAiResults(res);
@@ -174,7 +175,7 @@ export default function Store() {
               </div>
             ) : (
               <div className="flex flex-wrap gap-4">
-                {aiResults.products.map((p) => <ProductCard key={p.id} product={p} />)}
+                {aiResults.products.map((p:Product) => <ProductCard key={p.id} product={p} />)}
               </div>
             )}
           </div>
@@ -186,13 +187,13 @@ export default function Store() {
             {/* Sidebar */}
             <div className="grid-20">
               <div className="flex flex-col gap-2 mr-4 sticky top-24">
-                <button aria-label="All categories" onClick={() => { setSelectedCategory(''); setPage(1); }}
+                <button aria-label="All categories" onClick={() => { navigate('/store'); setPage(1); }}
                   className={`px-3 py-1 rounded text-left ${selectedCategory === '' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>
                   All
                 </button>
                 {categories.map((cat) => (
                   <button aria-label={`Category: ${cat}`} key={cat}
-                    onClick={() => { setSelectedCategory(cat); setPage(1); }}
+                    onClick={() => navigate(`/store?category=${encodeURIComponent(cat)}`)}
                     className={`px-3 py-1 rounded text-left ${selectedCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>
                     {cat}
                   </button>
@@ -231,7 +232,7 @@ export default function Store() {
                         <div className="flex items-center justify-between mb-4">
                           <h3 className="text-lg font-semibold text-gray-800">{cat}</h3>
                           <button aria-label={`View all in ${cat}`}
-                            onClick={() => { setSelectedCategory(cat); navigate('/store'); }}
+                            onClick={() => navigate(`/store?category=${encodeURIComponent(cat)}`)}
                             className="text-xs text-blue-600 hover:underline">View all →</button>
                         </div>
                         <div className="flex flex-wrap gap-4">
@@ -268,7 +269,7 @@ export default function Store() {
                         <div className="flex items-center justify-between mb-4">
                           <h3 className="text-lg font-semibold text-gray-800">{cat}</h3>
                           <button aria-label={`View all in ${cat}`}
-                            onClick={() => { setSelectedCategory(cat); setPage(1); }}
+                            onClick={() => navigate(`/store?category=${encodeURIComponent(cat)}`)}
                             className="text-xs text-blue-600 hover:underline">View all →</button>
                         </div>
                         <div className="flex flex-wrap gap-4">

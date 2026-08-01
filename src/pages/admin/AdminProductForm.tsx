@@ -4,9 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import { X, Upload, ImagePlus, Loader2 } from 'lucide-react';
-import api from '../api/api';
-import { useAppSelector } from '../hooks/hooks';
-import { selectCurrentUser } from '../store/authSlice';
+import api from '../../api/api';
+import { useAppSelector } from '../../hooks/hooks';
+import { selectCurrentUser } from '../../store/authSlice';
 
 // ── Schema ─────────────────────────────────────────────────────────────────
 
@@ -136,10 +136,10 @@ const AdminProductForm = () => {
 
     try {
       if (isEdit) {
-        await api.put(`/api/products/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        await api.put(`/api/products/${id}`, formData);
         setSuccess('Product updated successfully. Redirecting...');
       } else {
-        await api.post('/api/products', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        await api.post('/api/products', formData);
         setSuccess('Product created successfully. Redirecting...');
       }
       setTimeout(() => navigate('/store'), 1400);

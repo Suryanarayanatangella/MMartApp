@@ -13,14 +13,15 @@ import ContactUs from './pages/ContactUs';
 import ProductDetail from './pages/ProductDetail';
 import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminProducts from './pages/admin/AdminProducts';
 
 // Lazy-loaded pages
 const Store         = React.lazy(() => import('./pages/Store'));
 const CartPage      = React.lazy(() => import('./pages/CartPage'));
 const MyOrders      = React.lazy(() => import('./pages/MyOrders'));
 const Categories    = React.lazy(() => import('./pages/Categories'));
-const AdminOrders   = React.lazy(() => import('./pages/AdminOrders'));
-const AdminProductForm = React.lazy(() => import('./pages/AdminProductForm'));
+const AdminOrders   = React.lazy(() => import('./pages/admin/AdminOrders'));
+const AdminProductForm = React.lazy(() => import('./pages/admin/AdminProductForm'));
 const NoPage        = React.lazy(() => import('./pages/NoPage'));
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
               <Route index                         element={<AdminDashboard />}   />
               <Route path="orders"                 element={<AdminOrders />}      />
               <Route path="products/new"           element={<AdminProductForm />} />
+              <Route path="adminproducts"           element={<AdminProducts />} />
               <Route path="products/:id/edit"      element={<AdminProductForm />} />
             </Route>
 

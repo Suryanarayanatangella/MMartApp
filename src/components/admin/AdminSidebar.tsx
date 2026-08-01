@@ -3,11 +3,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Package, ShoppingBag,
   LogOut, Store, ChevronLeft, ChevronRight,
+  Plus,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useAppDispatch } from '../../hooks/hooks';
 import { logout } from '../../store/authSlice';
 import { clearCart } from '../../store/cartSlice';
+import api from '../../api/api';
 
 // ── Types ─────────────────────────────────────────────────────────────────
 
@@ -21,8 +23,8 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { to: '/admin',              icon: <LayoutDashboard size={20} />, label: 'Dashboard'   },
-  { to: '/admin/orders',       icon: <ShoppingBag size={20} />,    label: 'Orders'      },
-  { to: '/admin/products/new', icon: <Package size={20} />,        label: 'Add Product' },
+  { to: '/admin/orders',       icon: <ShoppingBag size={20} />, label: 'Orders'      },
+  { to: '/admin/adminproducts', icon: <Package size={20} />, label: 'Products' },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────
@@ -32,11 +34,18 @@ export default function AdminSidebar() {
   const navigate   = useNavigate();
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
-  const handleLogout = (): void => {
-    dispatch(logout());
-    dispatch(clearCart());
-    navigate('/');
+  const handleLogout = async (): Promise<void> => {
+    try {
+      await api.post('/auth/logout');
+    } catch {
+      // Ignore errors
+    } finally {
+      dispatch(logout());
+      dispatch(clearCart());
+      navigate('/');
+    }
   };
+
 
   return (
     <aside

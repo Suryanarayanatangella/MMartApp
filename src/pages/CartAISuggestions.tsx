@@ -1,7 +1,7 @@
 import { Sparkles, Package, RefreshCw, ShoppingCart } from 'lucide-react';
 import { useAppDispatch } from '../hooks/hooks';
 import { addToCart } from '../store/cartSlice';
-import type { CartAISuggestionsData } from '../types/index';
+import type { CartAISuggestionsData } from '../index';
 
 // ── Props ─────────────────────────────────────────────────────────────────
 
