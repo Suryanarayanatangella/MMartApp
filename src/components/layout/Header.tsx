@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   ShoppingCart, Search, Menu, X, User,
@@ -41,6 +42,7 @@ export default function Header() {
   const [searchValue,      setSearchValue]      = useState<string>('');
 
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
   // ── Effects ───────────────────────────────────────────────────────────
 
@@ -68,9 +70,9 @@ export default function Header() {
   const handleSignOut = async (): Promise<void> => {
     try {
       // Tell backend to clear the HTTP-only refresh token cookie
-      await api.post('/auth/logout');
+      await axios.post(`${API_BASE}/auth/logout`, {}, { withCredentials: true });
     } catch {
-      // Ignore errors — we still log out locally
+      // Ignore
     } finally {
       dispatch(logout());
       dispatch(clearCart());

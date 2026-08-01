@@ -136,10 +136,14 @@ const AdminProductForm = () => {
 
     try {
       if (isEdit) {
-        await api.put(`/api/products/${id}`, formData);
+        await api.put(`/api/products/${id}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         setSuccess('Product updated successfully. Redirecting...');
       } else {
-        await api.post('/api/products', formData);
+        await api.post('/api/products', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         setSuccess('Product created successfully. Redirecting...');
       }
       setTimeout(() => navigate('/store'), 1400);
